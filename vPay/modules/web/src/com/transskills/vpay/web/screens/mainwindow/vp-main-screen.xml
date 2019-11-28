@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        class="com.transskills.vpay.web.screens.mainwindow.VpayMainScreen"
+        messagesPack="com.transskills.vpay.web.screens.mainwindow"
+        caption="mainMsg://application.caption">
+    <layout expand="mainSplit">
+        <hbox id="titleBar"
+              expand="mainMenu"
+              margin="false;false;false;true"
+              height="AUTO"
+              spacing="true"
+              stylename="c-app-menubar c-inverse-header"
+              width="100%">
+
+            <label align="MIDDLE_LEFT"
+                   stylename="sampler-app-tittle-label"
+                   value="msg://menuBar.appTitle"/>
+
+            <menu id="mainMenu" align="MIDDLE_LEFT"/>
+
+            <userIndicator id="userIndicator" align="MIDDLE_LEFT"/>
+
+            <hbox id="mainButtonsBox" stylename="c-main-buttons" align="MIDDLE_LEFT">
+                <newWindowButton id="newWindowButton"
+                                 icon="app/images/new-window.png"
+                                 description="mainMsg://newWindowBtnDescription"/>
+
+                <logoutButton id="logoutButton"
+                              icon="app/images/exit.png"
+                              description="mainMsg://logoutBtnDescription"/>
+            </hbox>
+        </hbox>
+
+        <split id="mainSplit" width="100%"
+               maxSplitPosition="50%"
+               orientation="horizontal"
+               pos="300px"
+               settingsEnabled="false">
+            <vbox id="sideMenuBox"
+                  expand="sideMenu"
+                  height="100%"
+                  spacing="true">
+                <hbox id="appTitleBox"
+                      spacing="true"
+                      stylename="c-sidemenu-title"
+                      width="100%">
+                    <label id="appTitleLabel"
+                           align="MIDDLE_CENTER"
+                           value="msg://menuBar.appTitle"/>
+                </hbox>
+                <cssLayout id="searchBox"
+                           stylename="v-component-group search-box"
+                           width="100%">
+                    <textField id="searchField"
+                               inputPrompt="msg://sideMenu.search"
+                               width="100%"/>
+                    <button id="searchButton"
+                            caption="msg://sideMenu.search"
+                            icon="font-icon:SEARCH"/>
+                </cssLayout>
+                <hbox id="menuHeaderBox"
+                      expand="menuCaptionLabel"
+                      margin="false,true,false,true"
+                      spacing="true"
+                      width="100%">
+                    <label id="menuCaptionLabel"
+                           stylename="cuba-folders-pane-caption"
+                           value="msg://sideMenu.menuCaption"/>
+
+                    <linkButton id="collapseAllBtn"
+                                align="MIDDLE_RIGHT"
+                                description="msg://sideMenu.collapseAll"
+                                icon="font-icon:COMPRESS"
+                                stylename="small-link dark"/>
+                    <linkButton id="expandAllBtn"
+                                align="MIDDLE_RIGHT"
+                                icon="font-icon:EXPAND"
+                                description="msg://sideMenu.expandAll"
+                                stylename="small-link dark"/>
+                </hbox>
+                <sideMenu id="sideMenu"
+                          width="100%"/>
+                <hbox id="localesBox"
+                      margin="false,false,false,true"
+                      width="100%">
+
+                    <label id="spacer"/>
+
+                    <label id="localesLabel"
+                           align="MIDDLE_RIGHT"
+                           stylename="bold"
+                           value="msg://locales.caption"/>
+                    <lookupField id="localesSelect"
+                                 align="MIDDLE_RIGHT"
+                                 nullOptionVisible="false"
+                                 stylename="borderless"
+                                 textInputAllowed="false"
+                                 width="100px"/>
+                </hbox>
+            </vbox>
+
+            <workArea id="workArea" width="100%" height="100%">
+                <initialLayout>
+
+                </initialLayout>
+            </workArea>
+        </split>
+    </layout>
+</window>

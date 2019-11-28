@@ -1,0 +1,5 @@
+@import "hover-ext";
+
+@mixin com_transskills_vpay {
+  @include com_transskills_vpay-hover-ext;
+}
