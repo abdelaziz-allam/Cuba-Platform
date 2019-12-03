@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
-    <menu id="application-vpay" insertBefore="administration">
-        <item screen="vpay_Currency.browse"/>
+    <menu id="application-menu" description="mainMsg://menu-config.application-vpay">
+        <item screen="vpay_Country.browse" description="mainMsg://menu-config.vpay_Currency.browse"
+              icon="font-icon:AUTOMOBILE" shortcut="ctr+c" openType="NEW_TAB"/>
+        <item screen="vpay_BankBranch.browse" icon="BANK"/>
+        <item screen="vpay_Bank.browse"  icon="BANK"/>
+        <item screen="vpay_Bank.browse_details"  icon="ADDRESS_BOOK_O"/>
+        <item screen="vpay_Bank.browse_generated" icon="ANDROID"/>
     </menu>
 </menu-config>

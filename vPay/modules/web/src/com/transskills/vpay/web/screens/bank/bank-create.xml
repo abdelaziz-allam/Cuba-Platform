@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://editorCaption"
+        focusComponent="form"
+        messagesPack="com.transskills.vpay.web.screens.bank">
+    <data>
+        <instance id="bankDc"
+                  class="com.transskills.vpay.entity.bank.Bank"
+                  view="_local">
+            <loader/>
+        </instance>
+        <collection id="countriesDc" class="com.transskills.vpay.entity.country.Country" view="_minimal">
+            <loader id="countriesDl">
+                <query>
+                    <![CDATA[select e from vpay_Country e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="AUTO"
+                width="AUTO"
+                modal="true"
+                forceDialog="true"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="bankDc">
+            <column width="250px">
+                <textField id="nameField" property="name"/>
+                <textField id="bicField" property="bic"/>
+                <textField id="cbicField" property="cbic"/>
+                <lookupField id="countryField" optionsContainer="countriesDc" property="country" width="250px"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

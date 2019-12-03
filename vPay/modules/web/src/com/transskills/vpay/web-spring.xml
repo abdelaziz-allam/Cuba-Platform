@@ -7,5 +7,13 @@
     <context:component-scan base-package="com.transskills.vpay"/>
     
     <gui:screens base-packages="com.transskills.vpay.web"/>
+    <bean id="vpay_proxyCreator" class="com.haulmont.cuba.web.sys.remoting.WebRemoteProxyBeanCreator">
+        <property name="serverSelector" ref="cuba_ServerSelector"/>
+        <property name="remoteServices">
+            <map>
+                <entry key="vpay_BankService" value="com.transskills.vpay.service.BankService"/>
+            </map>
+        </property>
+    </bean>
 
 </beans>

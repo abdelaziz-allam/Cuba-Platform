@@ -1,0 +1,1 @@
+drop table VPAY_BANK__U93732 if exists cascade ;

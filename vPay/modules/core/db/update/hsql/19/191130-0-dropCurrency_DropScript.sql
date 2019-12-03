@@ -1,0 +1,1 @@
+drop table VPAY_CURRENCY__U29876 if exists cascade ;

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://browseCaption"
+        focusComponent="banksTable"
+        messagesPack="com.transskills.vpay.web.screens.bank">
+    <data readOnly="true">
+        <collection id="banksDc"
+                    class="com.transskills.vpay.entity.bank.Bank"
+                    view="bank-view">
+            <loader id="banksDl">
+                <query>
+                    <![CDATA[select e from vpay_Bank e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="banksTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="banksTable"
+                dataLoader="banksDl">
+            <properties include=".*"/>
+        </filter>
+        <table id="banksTable" stylename="small"
+               width="100%"
+               dataContainer="banksDc" settingsEnabled="false" showSelection="false" reorderingAllowed="false">
+            <actions>
+                <action id="create" type="create" shortcut="${TABLE_INSERT_SHORTCUT}"/>
+            </actions>
+            <columns>
+                <column id="name"/>
+                <column id="country"/>
+                <column id="bic"/>
+                <column id="cbic"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+            <button id="createBtn" action="banksTable.create"/>
+            </buttonsPanel>
+        </table>
+
+    </layout>
+</window>

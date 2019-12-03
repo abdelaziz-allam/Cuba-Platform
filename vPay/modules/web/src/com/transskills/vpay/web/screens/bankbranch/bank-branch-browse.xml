@@ -1,22 +1,29 @@
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         caption="msg://browseCaption"
         focusComponent="table"
-        messagesPack="com.transskills.vpay.web.screens.currency">
+        messagesPack="com.transskills.vpay.web.screens.bankbranch">
     <data>
-        <collection id="currenciesDc"
-                    class="com.transskills.vpay.entity.Currency"
-                    view="currency-view">
-            <loader id="currenciesDl">
+        <collection id="bankBranchesDc"
+                    class="com.transskills.vpay.entity.bank.BankBranch"
+                    view="bankBranch-view">
+            <loader id="bankBranchesDl">
                 <query>
-                    <![CDATA[select e from vpay_Currency e]]>
+                    <![CDATA[select e from vpay_BankBranch e]]>
                 </query>
             </loader>
         </collection>
-        <instance id="currencyDc"
-                  class="com.transskills.vpay.entity.Currency"
-                  view="_local">
+        <instance id="bankBranchDc"
+                  class="com.transskills.vpay.entity.bank.BankBranch"
+                  view="bankBranch-view">
             <loader/>
         </instance>
+        <collection id="banksDc" class="com.transskills.vpay.entity.bank.Bank" view="_minimal">
+            <loader id="banksDl">
+                <query>
+                    <![CDATA[select e from vpay_Bank e]]>
+                </query>
+            </loader>
+        </collection>
     </data>
     <actions>
         <action id="save" icon="icons/ok.png" caption="mainMsg://actions.Ok" shortcut="CTRL-ENTER"/>
@@ -26,20 +33,22 @@
     <layout>
         <split id="split" height="100%" orientation="horizontal" reversePosition="true" width="100%">
             <vbox id="lookupBox" expand="table" height="100%" margin="false,true,false,false" spacing="true">
-                <filter id="filter" applyTo="table" dataLoader="currenciesDl">
+                <filter id="filter" applyTo="table" dataLoader="bankBranchesDl">
                     <properties include=".*"/>
                 </filter>
                 <table id="table"
                        width="100%"
-                       dataContainer="currenciesDc">
+                       dataContainer="bankBranchesDc">
                     <actions>
                         <action id="create" type="create"/>
                         <action id="edit" type="edit"/>
                         <action id="remove" type="remove"/>
                     </actions>
                     <columns>
-                        <column id="unitName"/>
-                        <column id="precision"/>
+                        <column id="name"/>
+                        <column id="bbic"/>
+                        <column id="cbbic"/>
+                        <column id="bank"/>
                     </columns>
                     <rowsCount/>
                     <buttonsPanel id="buttonsPanel"
@@ -56,11 +65,12 @@
             </vbox>
             <vbox id="editBox" height="100%" margin="false,false,false,true" expand="fieldGroupBox" spacing="true">
                 <scrollBox id="fieldGroupBox">
-                    <form id="form" dataContainer="currencyDc">
+                    <form id="form" dataContainer="bankBranchDc">
                         <column width="250px">
-                            <textField id="codeField" property="code"/>
-                            <textField id="unitNameField" property="unitName"/>
-                            <textField id="precisionField" property="precision"/>
+                            <textField id="nameField" property="name"/>
+                            <textField id="bbicField" property="bbic"/>
+                            <textField id="cbbicField" property="cbbic"/>
+                            <lookupField id="bankField" optionsContainer="banksDc" property="bank"/>
                         </column>
                     </form>
                 </scrollBox>

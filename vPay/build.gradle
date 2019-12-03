@@ -4,8 +4,8 @@ buildscript {
     repositories {
         maven {
             url 'https://dl.bintray.com/cuba-platform/main'
-            
         }
+
         jcenter()
 
         

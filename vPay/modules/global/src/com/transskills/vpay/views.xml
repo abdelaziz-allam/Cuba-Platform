@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <views xmlns="http://schemas.haulmont.com/cuba/view.xsd">
 
-    <view entity="vpay_Currency" name="currency-view" overwrite="true">
-        <property name="unitName"/>
-        <property name="precision"/>
+    <view entity="vpay_Bank" name="bank-view" extends="_local">
+        <property name="country" view="_minimal"/>
+    </view>
+    <view entity="vpay_BankBranch" name="bankBranch-view" extends="_local">
+        <property name="bank" view="_minimal">
+            <property name="name"/>
+        </property>
     </view>
 </views>

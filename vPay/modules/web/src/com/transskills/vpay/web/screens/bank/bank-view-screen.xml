@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://caption"
+        messagesPack="com.transskills.vpay.web.screens.bank">
+    <data>
+        <instance id="bankDc"
+                  class="com.transskills.vpay.entity.bank.Bank"
+                  view="bank-view">
+            <loader/>
+        </instance>
+        <collection id="bankBranchesDc" class="com.transskills.vpay.entity.bank.BankBranch" view="_local">
+            <loader id="bankBranchesDl">
+                <query>
+                    select bb from vpay_BankBranch bb where bb.bank =:bank
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <actions>
+        <action id="back" icon="font-icon:BACKWARD" description="mainMsg://btn-back" shortcut="${PREVIOUS_TAB_SHORTCUT}"/>
+    </actions>
+    <layout>
+        <vbox id="editBox" height="100%" margin="false,false,false,true" expand="fieldGroupBox" spacing="true">
+            <linkButton action="back" />
+            <scrollBox id="fieldGroupBox">
+                <form id="form" dataContainer="bankDc">
+                    <column width="AUTO">
+                        <textField id="nameField" property="name" width="250px" enable="false"/>
+                        <textField id="countryField" property="country" width="250px" enable="false"/>
+                        <textField id="bicField" property="bic" width="250px" enable="false" />
+                        <textField id="cbicField" property="cbic" width="250px" enable="false"/>
+                        <label value="msg://bank-editor-branches" width="250px"  icon="BANK"/>
+                        <table width="425px" id="branches"    dataContainer="bankBranchesDc" settingsEnabled="false" showSelection="false">
+                            <columns>
+                                <column id="name"  width="240px" />
+                                <column id="bbic"  width="80px" />
+                                <column id="cbbic" width="80px" />
+                            </columns>
+                            <rows/>
+                        </table>
+                    </column>
+
+                </form>
+
+            </scrollBox>
+            <button action="back" caption="mainMsg://btn-back"/>
+        </vbox>
+    </layout>
+</window>

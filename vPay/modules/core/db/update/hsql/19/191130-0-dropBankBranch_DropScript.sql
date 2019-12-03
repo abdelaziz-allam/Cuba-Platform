@@ -1,0 +1,1 @@
+drop table VPAY_BANK_BRANCH__U96044 if exists cascade ;

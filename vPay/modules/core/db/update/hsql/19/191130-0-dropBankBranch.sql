@@ -1,0 +1,1 @@
+alter table VPAY_BANK_BRANCH rename to VPAY_BANK_BRANCH__U96044 ;

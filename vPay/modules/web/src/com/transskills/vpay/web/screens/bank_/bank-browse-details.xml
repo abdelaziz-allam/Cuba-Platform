@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://browseCaption"
+        focusComponent="banksDataGrid"
+        messagesPack="com.transskills.vpay.web.screens.bank_">
+    <data readOnly="true">
+        <collection id="banksDc"
+                    class="com.transskills.vpay.entity.bank.Bank"
+                    view="bank-view">
+            <loader id="banksDl">
+                <query>
+                    <![CDATA[select e from vpay_Bank e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="banksDataGrid"
+            spacing="true">
+        <filter id="filter"
+                applyTo="banksDataGrid"
+                dataLoader="banksDl">
+            <properties include=".*"/>
+        </filter>
+        <dataGrid id="banksDataGrid"
+               width="100%"
+               settingsEnabled="false"
+               dataContainer="banksDc">
+            <columns>
+                <column property="name"/>
+                <column property="country"/>
+                <column property="bic"/>
+                <column property="cbic"/>
+            </columns>
+        </dataGrid>
+    </layout>
+</window>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://editorCaption"
+        focusComponent="form"
+        messagesPack="com.transskills.vpay.web.screens.bank">
+    <data>
+        <instance id="bankBranchDc"
+                  class="com.transskills.vpay.entity.bank.BankBranch"
+                  view="bankBranch-view">
+            <loader/>
+        </instance>
+        <collection id="banksDc" class="com.transskills.vpay.entity.bank.Bank" view="_minimal">
+            <loader id="banksLc">
+                <query>
+                    <![CDATA[select e from vpay_Bank e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600" forceDialog="true"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="bankBranchDc">
+            <column width="250px">
+                <textField id="nameField" property="name"/>
+                <textField id="bbicField" property="bbic"/>
+                <textField id="cbbicField" property="cbbic"/>
+                <textField id="bankField"  property="bank" />
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

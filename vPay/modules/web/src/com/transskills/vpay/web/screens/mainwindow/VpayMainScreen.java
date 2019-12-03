@@ -1,7 +1,9 @@
 package com.transskills.vpay.web.screens.mainwindow;
 
+import com.haulmont.cuba.core.global.AppBeans;
 import com.haulmont.cuba.core.global.GlobalConfig;
 import com.haulmont.cuba.core.global.Messages;
+import com.haulmont.cuba.core.sys.AppContext;
 import com.haulmont.cuba.gui.UrlRouting;
 import com.haulmont.cuba.gui.components.*;
 import com.haulmont.cuba.gui.components.mainwindow.AppMenu;
@@ -35,7 +37,6 @@ public class VpayMainScreen extends AbstractMainWindow {
     @Inject
     private LookupField<Locale> localesSelect;
 
-
     @Inject
     private GlobalConfig globalConfig;
 
@@ -48,7 +49,6 @@ public class VpayMainScreen extends AbstractMainWindow {
     @Inject
     private UrlRouting urlRouting;
 
-
     @Inject
     private Messages messages;
 
@@ -58,7 +58,6 @@ public class VpayMainScreen extends AbstractMainWindow {
     private List<SideMenu.MenuItem> foundItems = new ArrayList<>();
     private List<SideMenu.MenuItem> currentMenuItems = new ArrayList<>();
     private Map<String,List<SideMenu.MenuItem>> sideMenuDictionary = new HashMap<>();
-    private List<String> parentListIdsToExpand = new ArrayList<>();
 
     @Subscribe
     protected void onInit(InitEvent event) {
@@ -71,7 +70,6 @@ public class VpayMainScreen extends AbstractMainWindow {
 
     private void initAppMenu() {
         List<AppMenu.MenuItem> menuItems = mainMenu.getMenuItems();
-
         menuItems.forEach(menuItem -> {
             if( menuItem.hasChildren()) {
                menuItem.setCommand( parent -> {
@@ -89,6 +87,8 @@ public class VpayMainScreen extends AbstractMainWindow {
                 });
             }
         });
+        initAppMenuView();
+
     }
 
     private void initSideMenuDictionary() {
@@ -100,6 +100,20 @@ public class VpayMainScreen extends AbstractMainWindow {
         });
 
         sideMenu.removeAllMenuItems();
+    }
+
+    private void initAppMenuView() {
+        List<AppMenu.MenuItem> menuItems = mainMenu.getMenuItems();
+        Integer appMenuDots = Integer.valueOf(AppContext.getProperty("vapy.appmenu.dots"));
+
+        if (menuItems.size() > appMenuDots) {
+            AppMenu.MenuItem dotMenuitem =  mainMenu.createMenuItem("dotMenuItem",".....");
+            for (int i = appMenuDots ; i< menuItems.size();i++) {
+                    dotMenuitem.addChildItem(menuItems.get(i));
+                    mainMenu.removeMenuItem(menuItems.get(i));
+            }
+            mainMenu.addMenuItem(dotMenuitem);
+        }
     }
 
     private void initMainSplit() {
@@ -151,11 +165,6 @@ public class VpayMainScreen extends AbstractMainWindow {
            });
         }
     }
-
-
-
-
-
 
     private void findItemsRecursively(List<SideMenu.MenuItem> items, String searchValue) {
         for (SideMenu.MenuItem item : items) {

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://editorCaption"
+        focusComponent="form"
+        messagesPack="com.transskills.vpay.web.screens.bank">
+    <data>
+        <instance id="bankDc"
+                  class="com.transskills.vpay.entity.bank.Bank"
+                  view="bank-view">
+            <loader/>
+        </instance>
+        <collection id="countriesDc" class="com.transskills.vpay.entity.country.Country" view="_minimal">
+            <loader id="countriesDl">
+                <query>
+                    <![CDATA[select e from vpay_Country e]]>
+                </query>
+            </loader>
+        </collection>
+        <collection id="bankBranchesDc" class="com.transskills.vpay.entity.bank.BankBranch" view="_local">
+            <loader id="bankBranchesDl">
+                <query>
+                    select bb from vpay_BankBranch bb where bb.bank =:bank
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="bankDc">
+            <column width="250px">
+                <textField id="nameField" property="name"/>
+                <lookupField id="countryField" optionsContainer="countriesDc" property="country" />
+
+                <textField id="bicField" property="bic"/>
+                <textField id="cbicField" property="cbic"/>
+            </column>
+        </form>
+        <table id="branchesTbl"
+               width="100%"
+               dataContainer="bankBranchesDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="name"/>
+                <column id="bbic"/>
+                <column id="cbbic"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="branchesTbl.create"/>
+                <button id="editBtn" action="branchesTbl.edit"/>
+                <button id="removeBtn" action="branchesTbl.remove"/>
+            </buttonsPanel>
+        </table>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>
